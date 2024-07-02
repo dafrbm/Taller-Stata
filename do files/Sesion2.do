@@ -81,44 +81,29 @@ outreg2 using myfile, sum(detail) replace ///
 eqkeep(N mean sd max p50 min) keep(INGLABO)
 restore
 
-/*TAREA: Quiero que le trabajemos a generar tablas con descriptivas
-desagregando por categorías. Voy a dejar unas instrucciones y algunos
-tips. La idea es que hagan el código y lo peguen en el grupo. (El primero
-se gana un premio especial)
+/*
+
+TAREA: Quiero que le trabajemos a generar tablas con descriptivas desagregando por categorías. Voy a dejar unas instrucciones y algunos tips. La idea es que hagan el código y lo peguen en el grupo. (El primero se gana un premio especial)
 
 INSTRUCCIONES
 
-1. En su base de datos, conservar únicamente las variables correspondientes
-a sexo, edad, auto-reconocimiento étnico e ingreso laboral (INGLABO). Busquen
-en el diccionario sus códigos y valores correspondientes.
+1. En su base de datos, conservar únicamente las variables correspondientes a sexo, edad, auto-reconocimiento étnico e ingreso laboral (INGLABO). Busquen en el diccionario sus códigos y valores correspondientes.
 
-2. Tomen las variables categóricas de sexo y auto-reconocimiento étnico y cambienles
-el nombre por "sexo" y "etnia" (sé que suena simple pero la idea es hacer todo replicable).
-A su vez revisen el diccionario y etiqueten sus valores correspondientes (usando label
-define y label values).
+2. Tomen las variables categóricas de sexo y auto-reconocimiento étnico y  cambienles el nombre por "sexo" y "etnia" (sé que suena simple pero la idea es hacer todo replicable). A su vez revisen el diccionario y etiqueten sus valores correspondientes (usando label define y label values).
 
 3. Para la edad, van a crear una variable de rangos de edad, de la siguiente manera.
 
-a. Usen keep para limitar la base de datos únicamente a los individuos que tengan entre
-25 y 65 años (tengan mucho cuidado usando los >, <, >= o <=).
+a. Usen keep para limitar la base de datos únicamente a los individuos que tengan entre 25 y 65 años (tengan mucho cuidado usando los >, <, >= o <=).
 
-b. Creen una nueva variable "edad_ran" que sea igual a 0. Luego reemplacen los valores de 1 en
-adelante en ventanas de 10 años (como trabajo con límites, piensen en que toca decir "Reemplaceme
-la variable x con tal valor, si la variable "edad" es mayor (o mayor igual) a "y" y menor (o
-menor igual) a "z").
+b. Creen una nueva variable "edad_ran" que sea igual a 0. Luego reemplacen los valores de 1 en adelante en ventanas de 10 años (como trabajo con límites, piensen en que toca decir "Reemplaceme la variable x con tal valor, si la variable "edad" es mayor (o mayor igual) a "y" y menor (o menor igual) a "z").
 
-c. Al tener los rangos, etiqueten cada rango siguiendo "Entre "y" y "z" años).
+c. Al tener los rangos, etiqueten cada rango siguiendo "Entre "y" y "z" años). EJ: Entre 25 y 34 años.
 
-4. Revisen en la ayuda de Stata el comando "table". Permite crear tablas con mayor flexibilidad.
+4. Revisen en la ayuda de Stata el comando "table". Permite crear tablas con mayor flexibilidad. Presten especial atención a las n-way tables, y las funciones over y sumstat.
 
-5.
+5. Hagan 3 tablas. Donde me muestren las estadísticas descriptivas de INGLABO para cada los grupos dentro de cada una de las 3 variables categóricas (sexo, rangos de edad y etnia). 
+
 */
-
-
-
-
-
-
 
 
 
