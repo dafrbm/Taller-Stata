@@ -6,23 +6,34 @@ clear all
 
 * Fijar globals para rutas
 
-global Bases "C:\Users\d.becerramedina\Desktop\Taller Stata\Bases"
+global Bases "C:\Users\Lenovo\Desktop\TREES\Taller Stata-GEIH\Bases"
 
-global Resultados "C:\Users\d.becerramedina\Desktop\Taller Stata\Resultados"
+global Resultados "C:\Users\Lenovo\Desktop\TREES\Taller Stata-GEIH\Resultados"
 
 *Pegar módulos de la GEIH
 
-use "$Bases/Enero/vivienda.dta", clear
+use "$Bases/Enero/***Base que quiero utilizar***.dta", clear
 
 foreach folder in Enero Febrero Marzo {
 	
-	use "$Bases/`folder'/vivienda.dta", clear
+	use "$Bases/`folder'/car_gen.dta", clear
 	
 	merge 1:1 DIRECTORIO SECUENCIA_P ORDEN using "$Bases/`folder'/Ocupados.dta", force generate(_ocupados)
 	
 	merge 1:1 DIRECTORIO SECUENCIA_P ORDEN using "$Bases/`folder'/No ocupados.dta", force generate(_noocupados)
 	
-	save "$Bases/`folder'/pegue2.dta"
+	save "$Bases/`folder'/`folder'.dta"
+}
+
+*Pegar con módulo de vivienda
+
+foreach folder in Enero Febrero Marzo {
+	
+	use "$Bases/`folder'/vivienda.dta", clear
+	
+	merge 1:m DIRECTORIO SECUENCIA_P using "$Bases/`folder'/`folder'.dta", force generate(_vivienda)
+	
+	save "$Bases/`folder'/`folder'.dta", replace
 }
 
 *Pegar meses
@@ -46,13 +57,12 @@ tostring DEPTO, generate (DEPART)
 describe DEPART
 
 *KEEP Y DROP
+*un ejemplo para crear la base de datos para un solo departamento (Santander en este caso tiene el código 68)
+*También les muestro un buen truco que es preserve y restore (funciones que nos permiten hacer una especie de Ctrl+Z). Desde un do file siempre correrán bien si ejecutan todas las líneas desde preserve hasta restore, si se ejecutan por separado, cuando corran restore les va a señalar error.
 
 preserve
-
 keep if DPTO == "68"
-
 restore
-
 drop 
 
 *Descriptivas
@@ -104,7 +114,3 @@ c. Al tener los rangos, etiqueten cada rango siguiendo "Entre "y" y "z" años). 
 5. Hagan 3 tablas. Donde me muestren las estadísticas descriptivas de INGLABO para cada los grupos dentro de cada una de las 3 variables categóricas (sexo, rangos de edad y etnia). 
 
 */
-
-
-
-
